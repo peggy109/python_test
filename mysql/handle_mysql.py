@@ -1,7 +1,10 @@
 #!/usr/bin/python
 import MySQLdb
-def handle_mysql (host,username,password,database,command):
-    db = MySQLdb.connect(host,username,password,database);
+def handle_mysql (host,username,password,database,command,port=3306):
+    ret=0;
+    data='';
+    print "MySQLdb.connect(host=",host,",user=",username,",passwd=",password,",db=",database,",port=",port,")";
+    db = MySQLdb.connect(host=host,user=username,passwd=password,db=database,port=port);
     cursor = db.cursor();
     try:
         cursor.execute(command);
@@ -18,7 +21,9 @@ def handle_mysql (host,username,password,database,command):
             db.commit();
     except:
         db.rollback();
+        ret=2052;
     db.close();
     print "data:"
     print data
     print "end"
+    return ret;
