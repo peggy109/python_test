@@ -12,7 +12,7 @@ ret = 0;
 #print "username:", username
 #print "database:", database
 
-query="select max(task_id) from verify_tasks where authentication_code='"+authentication_code+"'";
+query="select max(task_id) from verify_tasks where authentication_code='"+authentication_code + "' and status!='4'";
 #print "query:", query
 db = MySQLdb.connect(host, username, password, database);
 cursor = db.cursor();
